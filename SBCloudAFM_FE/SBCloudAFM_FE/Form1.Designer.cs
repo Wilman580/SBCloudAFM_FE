@@ -344,6 +344,7 @@
             // 
             this.txtSubtotal.Location = new System.Drawing.Point(58, 22);
             this.txtSubtotal.Name = "txtSubtotal";
+            this.txtSubtotal.ReadOnly = true;
             this.txtSubtotal.Size = new System.Drawing.Size(100, 20);
             this.txtSubtotal.TabIndex = 3;
             // 
@@ -351,6 +352,7 @@
             // 
             this.txtIvaTotal.Location = new System.Drawing.Point(58, 46);
             this.txtIvaTotal.Name = "txtIvaTotal";
+            this.txtIvaTotal.ReadOnly = true;
             this.txtIvaTotal.Size = new System.Drawing.Size(100, 20);
             this.txtIvaTotal.TabIndex = 4;
             // 
@@ -358,6 +360,7 @@
             // 
             this.txtTotal.Location = new System.Drawing.Point(59, 71);
             this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(100, 20);
             this.txtTotal.TabIndex = 5;
             // 
