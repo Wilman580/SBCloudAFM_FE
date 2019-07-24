@@ -16,5 +16,15 @@ namespace SBCloudAFM_FE
         {
             InitializeComponent();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
