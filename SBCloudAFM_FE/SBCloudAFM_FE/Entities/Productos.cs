@@ -8,8 +8,8 @@ namespace SBCloudAFM_FE.Entities
 {
     class Productos
     {
-        public string nombrePro { get; set; }
-        public float precioPro { get; set; }
+        public string NombrePro { get; set; }
+        public float PrecioPro { get; set; }
 
         
     }

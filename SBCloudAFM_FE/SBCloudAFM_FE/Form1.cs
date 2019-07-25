@@ -19,6 +19,7 @@ namespace SBCloudAFM_FE
         public Form1()
         {
             InitializeComponent();
+            listaProductos = new List<Productos>();
             creadorProducto();
 
         }
@@ -26,20 +27,34 @@ namespace SBCloudAFM_FE
         public void creadorProducto()
         {
             listaProductosString = new List<string>();
-            listaProductosString.Add("GalletasRicas-0,50");
-            listaProductosString.Add("GalletasSalticas-0,60");
+            listaProductosString.Add("GalletasRicas-0.50");
+            listaProductosString.Add("GalletasSalticas-0.60");
             foreach (string producto in listaProductosString)
             {
                 string[] vecpro = producto.Split('-');
                 string nombre = (string)vecpro.GetValue(0);
-                float precio = (float)vecpro.GetValue(1);
+                float precio = Convert.ToSingle(vecpro.GetValue(1));
                 Productos p = new Productos();
-                p.nombrePro = nombre;
-                p.precioPro = precio;
+                p.NombrePro = nombre;
+                p.PrecioPro = precio;
                 listaProductos.Add(p);
             }
+            foreach(Productos p in listaProductos)
+            {
+                cbxDetalle.Items.Add(p.NombrePro);
+            }
+            this.cbxDetalle.SelectedIndexChanged += new System.EventHandler(cargarPrecio);
         }
 
+        private void cargarPrecio(object sender, System.EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            string selectedEmployee = (string)cbxDetalle.SelectedItem;
+            int resultIndex = -1;
+            resultIndex = cbxDetalle.FindStringExact(selectedEmployee);
+            Productos pp = listaProductos[resultIndex];
+            txtPrecio.Text = pp.PrecioPro.ToString();
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -49,5 +64,7 @@ namespace SBCloudAFM_FE
         {
 
         }
+
+
     }
 }
