@@ -11,6 +11,6 @@ namespace SBCloudAFM_FE.Entities
         public string NombrePro { get; set; }
         public float PrecioPro { get; set; }
 
-        
+        public float IvaPro { get; set; }
     }
 }

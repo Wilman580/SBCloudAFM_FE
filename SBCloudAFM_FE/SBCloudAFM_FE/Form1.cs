@@ -15,7 +15,7 @@ namespace SBCloudAFM_FE
     {
         List<string> listaProductosString;
         List<Productos> listaProductos;
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -27,16 +27,21 @@ namespace SBCloudAFM_FE
         public void creadorProducto()
         {
             listaProductosString = new List<string>();
-            listaProductosString.Add("GalletasRicas-0.50");
-            listaProductosString.Add("GalletasSalticas-0.60");
+            listaProductosString.Add("GalletasRicas-0.50-0");
+            listaProductosString.Add("GalletasSalticas-0.60-0");
+            listaProductosString.Add("Lava-1.60-1");
             foreach (string producto in listaProductosString)
             {
                 string[] vecpro = producto.Split('-');
                 string nombre = (string)vecpro.GetValue(0);
                 float precio = Convert.ToSingle(vecpro.GetValue(1));
+                int iva = Convert.ToInt32(vecpro.GetValue(2));
+                
+                
                 Productos p = new Productos();
                 p.NombrePro = nombre;
                 p.PrecioPro = precio;
+                p.IvaPro = iva;
                 listaProductos.Add(p);
             }
             foreach(Productos p in listaProductos)
@@ -53,7 +58,25 @@ namespace SBCloudAFM_FE
             int resultIndex = -1;
             resultIndex = cbxDetalle.FindStringExact(selectedEmployee);
             Productos pp = listaProductos[resultIndex];
-            txtPrecio.Text = pp.PrecioPro.ToString();
+            float precio = pp.PrecioPro;
+            txtPrecio.Text = precio.ToString();
+            int cant = int.Parse(txtCantidad.Text);
+            float costo = cant * precio;
+            float ivat = 0;
+            if (pp.IvaPro == 0)
+            {
+                ivat = 0;
+            }
+            if (pp.IvaPro == 1)
+            {
+                ivat = (float)(costo * 0.12);
+            }
+            if (pp.IvaPro == 2)
+            {
+                ivat = (float)(costo * 0.14);
+            }
+            txtIVA.Text = ivat.ToString();
+            txtImporte.Text = (costo+ivat).ToString();
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -65,6 +88,9 @@ namespace SBCloudAFM_FE
 
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
