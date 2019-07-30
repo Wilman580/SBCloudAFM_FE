@@ -15,11 +15,14 @@ namespace SBCloudAFM_FE
     {
         List<string> listaProductosString;
         List<Productos> listaProductos;
+        int codigoDet = 1;
         
+        List<Detalle> listaDetalles;
         public Form1()
         {
             InitializeComponent();
             listaProductos = new List<Productos>();
+            listaDetalles = new List<Detalle>();
             creadorProducto();
 
         }
@@ -76,7 +79,8 @@ namespace SBCloudAFM_FE
                 ivat = (float)(costo * 0.14);
             }
             txtIVA.Text = ivat.ToString();
-            txtImporte.Text = (costo+ivat).ToString();
+            txtImporte.Text = (costo).ToString();
+            
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -90,7 +94,52 @@ namespace SBCloudAFM_FE
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            float subtotal = 0;
+            float ivatotal = 0;
+            float total = 0;
+            Detalle detalle = new Detalle();
+            detalle.CodigoD = codigoDet;
+            detalle.CantidadD = int.Parse(txtCantidad.Text);
+            detalle.ProductoD = cbxDetalle.Text;
+            detalle.PrecioD = Convert.ToSingle(txtPrecio.Text);
+            detalle.IvaD = Convert.ToSingle(txtIVA.Text);
+            detalle.ImporteD = Convert.ToSingle(txtImporte.Text);
+            listaDetalles.Add(detalle);
+            BindingSource bs = new BindingSource(listaDetalles,"");
+            tblDatos.DataSource = bs;
+            codigoDet++;
+            foreach(Detalle d in listaDetalles)
+            {
+                subtotal += d.ImporteD;
+                ivatotal += d.IvaD;
+                total = subtotal + ivatotal;
+            }
+            txtSubtotal.Text = subtotal.ToString();
+            txtIvaTotal.Text = ivatotal.ToString();
+            txtTotal.Text = total.ToString();
+        }
 
+        private void btnTerminar_Click(object sender, EventArgs e)
+        {
+            if (txtCliente.Text!=null)
+            {
+                Factura factura = new Factura();
+                factura.CodigoFact = lblNumerof.Text;
+                factura.Cliente = txtCliente.Text;
+                factura.RucCI = int.Parse(txtRuc.Text);
+                factura.FechaFac = DateTime.Parse(txtFecha.Text);
+                factura.Direccion = txtDireccion.Text;
+                factura.Telefono = txtTelefono.Text;
+                factura.SubTotal = Convert.ToSingle(txtSubtotal.Text);
+                factura.IvaTotal = Convert.ToSingle(txtIvaTotal.Text);
+                factura.Total = Convert.ToSingle(txtTotal.Text);
+                foreach(Detalle d in listaDetalles)
+                {
+                    d.Factura = factura;
+                }
+                BindingSource bs = new BindingSource(listaDetalles, "");
+                tblDatos.DataSource = bs;
+            }
         }
     }
 }

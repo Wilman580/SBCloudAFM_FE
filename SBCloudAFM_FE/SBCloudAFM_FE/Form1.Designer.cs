@@ -48,11 +48,6 @@
             this.lblMensaje = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tblDatos = new System.Windows.Forms.DataGridView();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtIvaTotal = new System.Windows.Forms.TextBox();
@@ -76,6 +71,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnTerminar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -267,49 +263,14 @@
             // 
             // tblDatos
             // 
+            this.tblDatos.AllowUserToAddRows = false;
             this.tblDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tblDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cantidad,
-            this.detalle,
-            this.precio,
-            this.iva,
-            this.importe});
             this.tblDatos.Location = new System.Drawing.Point(9, 19);
             this.tblDatos.Name = "tblDatos";
+            this.tblDatos.ReadOnly = true;
             this.tblDatos.Size = new System.Drawing.Size(670, 149);
             this.tblDatos.TabIndex = 0;
             this.tblDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cant";
-            this.cantidad.Name = "cantidad";
-            // 
-            // detalle
-            // 
-            this.detalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.detalle.HeaderText = "Detalle";
-            this.detalle.Name = "detalle";
-            this.detalle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.detalle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // precio
-            // 
-            this.precio.HeaderText = "PrecioUnit";
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            // 
-            // iva
-            // 
-            this.iva.HeaderText = "IVA";
-            this.iva.Name = "iva";
-            this.iva.ReadOnly = true;
-            // 
-            // importe
-            // 
-            this.importe.HeaderText = "Importe";
-            this.importe.Name = "importe";
-            this.importe.ReadOnly = true;
             // 
             // groupBox4
             // 
@@ -528,11 +489,22 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Cantidad";
             // 
+            // btnTerminar
+            // 
+            this.btnTerminar.Location = new System.Drawing.Point(618, 114);
+            this.btnTerminar.Name = "btnTerminar";
+            this.btnTerminar.Size = new System.Drawing.Size(106, 29);
+            this.btnTerminar.TabIndex = 11;
+            this.btnTerminar.Text = "Terminar Factura";
+            this.btnTerminar.UseVisualStyleBackColor = true;
+            this.btnTerminar.Click += new System.EventHandler(this.btnTerminar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(760, 534);
+            this.Controls.Add(this.btnTerminar);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnGuardar);
@@ -607,11 +579,7 @@
         private System.Windows.Forms.TextBox txtIVA;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.TextBox txtCantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn detalle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iva;
-        private System.Windows.Forms.DataGridViewTextBoxColumn importe;
+        private System.Windows.Forms.Button btnTerminar;
     }
 }
 
