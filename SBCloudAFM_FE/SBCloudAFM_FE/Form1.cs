@@ -21,6 +21,9 @@ namespace SBCloudAFM_FE
         public Form1()
         {
             InitializeComponent();
+            btnTerminar.Enabled = false;
+            btnVerificar.Enabled = false;
+            btnGuardar.Enabled = false;
             listaProductos = new List<Productos>();
             listaDetalles = new List<Detalle>();
             creadorProducto();
@@ -117,11 +120,13 @@ namespace SBCloudAFM_FE
             txtSubtotal.Text = subtotal.ToString();
             txtIvaTotal.Text = ivatotal.ToString();
             txtTotal.Text = total.ToString();
+            btnTerminar.Enabled = true;
         }
 
         private void btnTerminar_Click(object sender, EventArgs e)
         {
-            if (txtCliente.Text!=null)
+
+            if (!String.IsNullOrEmpty(txtCliente.Text) && !String.IsNullOrEmpty(txtRuc.Text) && !String.IsNullOrEmpty(txtDireccion.Text) && !String.IsNullOrEmpty(txtTelefono.Text))
             {
                 Factura factura = new Factura();
                 factura.CodigoFact = lblNumerof.Text;
@@ -139,6 +144,12 @@ namespace SBCloudAFM_FE
                 }
                 BindingSource bs = new BindingSource(listaDetalles, "");
                 tblDatos.DataSource = bs;
+                btnVerificar.Enabled = true;
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("Datos Incompletos\nRellene el Formulario","Error",MessageBoxButtons.OK);
+                
             }
         }
     }
