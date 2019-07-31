@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SBCloudAFM_FE.Entities
 {
-    class Detalle
+    public class Detalle
     {
         public int CodigoD { get; set; }
         public int CantidadD { get; set; }

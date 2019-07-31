@@ -17,7 +17,7 @@ namespace SBCloudAFM_FE
         List<string> listaProductosString;
         List<Productos> listaProductos;
         int codigoDet = 1;
-        
+        Factura factura;
         List<Detalle> listaDetalles;
         public Form1()
         {
@@ -28,7 +28,7 @@ namespace SBCloudAFM_FE
             listaProductos = new List<Productos>();
             listaDetalles = new List<Detalle>();
             creadorProducto();
-
+            factura = new Factura();
         }
 
         public void creadorProducto()
@@ -129,7 +129,7 @@ namespace SBCloudAFM_FE
 
             if (!String.IsNullOrEmpty(txtCliente.Text) && !String.IsNullOrEmpty(txtRuc.Text) && !String.IsNullOrEmpty(txtDireccion.Text) && !String.IsNullOrEmpty(txtTelefono.Text))
             {
-                Factura factura = new Factura();
+                
                 factura.CodigoFact = lblNumerof.Text;
                 factura.Cliente = txtCliente.Text;
                 factura.RucCI = int.Parse(txtRuc.Text);
@@ -143,6 +143,8 @@ namespace SBCloudAFM_FE
                 BindingSource bs = new BindingSource(listaDetalles, "");
                 tblDatos.DataSource = bs;
                 btnVerificar.Enabled = true;
+                btnTerminar.Enabled = false;
+                btnAgregar.Enabled = false;
             }
             else
             {
@@ -157,14 +159,16 @@ namespace SBCloudAFM_FE
             //Conexion mediante Cola
             const string queueName = "afm-queues";
             IQueueClient queueClient=new QueueClient(SBConectionString, queueName);
-
+            var objetoFE = Newtonsoft.Json.JsonConvert.SerializeObject(factura);
             //
             try
             {
-
-            }catch (Exception ex)
+                var paqueteFE = new Microsoft.Azure.ServiceBus.Message(Encoding.UTF8.GetBytes(objetoFE));
+                queueClient.SendAsync(paqueteFE);
+                MessageBox.Show("Factura Enviada para su Comprobación");
+            } catch (Exception ex)
             {
-
+                MessageBox.Show("Error al enviar la Factura");
             }
 
 
