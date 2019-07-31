@@ -168,7 +168,7 @@ namespace SBCloudAFM_FE
                 MessageBox.Show("Factura Enviada para su Comprobación");
             } catch (Exception ex)
             {
-                MessageBox.Show("Error al enviar la Factura");
+                MessageBox.Show("Error al enviar la Factura"+ex.Message);
             }
 
 
