@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Azure.ServiceBus;
 
 namespace SBCloudAFM_FE
 {
@@ -138,10 +139,7 @@ namespace SBCloudAFM_FE
                 factura.SubTotal = Convert.ToSingle(txtSubtotal.Text);
                 factura.IvaTotal = Convert.ToSingle(txtIvaTotal.Text);
                 factura.Total = Convert.ToSingle(txtTotal.Text);
-                foreach(Detalle d in listaDetalles)
-                {
-                    d.Factura = factura;
-                }
+                factura.ListaDet = listaDetalles;
                 BindingSource bs = new BindingSource(listaDetalles, "");
                 tblDatos.DataSource = bs;
                 btnVerificar.Enabled = true;
@@ -151,6 +149,24 @@ namespace SBCloudAFM_FE
                 DialogResult dr = MessageBox.Show("Datos Incompletos\nRellene el Formulario","Error",MessageBoxButtons.OK);
                 
             }
+        }
+
+        private void btnVerificar_Click(object sender, EventArgs e)
+        {
+            const string SBConectionString = "Endpoint=sb://sbcloud-afm.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=iWoY+fomhRSsoLHZikXH3YqA1qEqy2u06iDwAXyO7eo=";
+            //Conexion mediante Cola
+            const string queueName = "afm-queues";
+            IQueueClient queueClient=new QueueClient(SBConectionString, queueName);
+
+            //
+            try
+            {
+
+            }
+
+
+            //Cerrando conexiones
+            queueClient.CloseAsync();
         }
     }
 }

@@ -347,6 +347,7 @@
             this.btnVerificar.TabIndex = 6;
             this.btnVerificar.Text = "Verificar Datos";
             this.btnVerificar.UseVisualStyleBackColor = true;
+            this.btnVerificar.Click += new System.EventHandler(this.btnVerificar_Click);
             // 
             // btnGuardar
             // 

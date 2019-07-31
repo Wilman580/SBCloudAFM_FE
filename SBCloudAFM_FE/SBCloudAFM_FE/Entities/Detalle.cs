@@ -14,6 +14,6 @@ namespace SBCloudAFM_FE.Entities
         public float PrecioD { get; set; }
         public float IvaD { get; set; }
         public float ImporteD { get; set; }
-        public Factura Factura { get; set; }
+        //public Factura Factura { get; set; }
     }
 }

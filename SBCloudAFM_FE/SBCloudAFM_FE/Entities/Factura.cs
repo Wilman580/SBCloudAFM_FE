@@ -18,5 +18,6 @@ namespace SBCloudAFM_FE.Entities
         public float IvaTotal { get; set; }
         public float Total { get; set; }
         public string Observacion { get; set; }
+        public List<Detalle> ListaDet { get; set; }
     }
 }
